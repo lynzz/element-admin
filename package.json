@@ -1,0 +1,29 @@
+{
+  "name": "element-admin",
+  "version": "0.1.0",
+  "description": "An Element UI & Vue.js quick start boilerplate with vue-cli support",
+  "main": "meta.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lynzz/element-admin.git"
+  },
+  "keywords": [
+    "vue",
+    "element",
+    "hot",
+    "reload",
+    "router",
+    "vuex",
+    "boilerplate",
+    "admin"
+  ],
+  "author": "lynzz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lynzz/element-admin/issues"
+  },
+  "homepage": "https://github.com/lynzz/element-admin#readme"
+}
