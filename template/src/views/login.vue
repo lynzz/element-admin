@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     goDashboard () {
-      this.$router.push('dashboard')
+      this.$router.push('user')
     },
     handleSubmit () {
       this.$refs.loginForm.validate((valid) => {

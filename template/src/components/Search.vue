@@ -1,7 +1,11 @@
 <template>
   <div class="p-search">
     <el-form :inline="true" :rules="searchRules" ref="searchForm" :model="searchForm">
-      <slot name="form"></slot>
+      <slot name="form">
+        <el-form-item prop="keywords">
+          <el-input v-model="searchForm.keywords" placeholder="关键字"></el-input>
+        </el-form-item>
+      </slot>
       <el-form-item>
         <el-button type="primary" @click="handleSubmit">查询</el-button>
       </el-form-item>
