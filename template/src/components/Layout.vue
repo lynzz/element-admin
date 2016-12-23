@@ -1,45 +1,57 @@
 <template>
-  <div class="p-layout-aside">
-    <div class="p-layout-aside">
-      <div class="p-layout-aside" :class="{'is-collapse': isCollapse}">
-        <aside class="p-layout-sider">
-          <div class="p-layout-logo"></div>
-          <el-menu
-            theme="dark"
-            :unique-opened="true"
-            :router="true">
-            <el-submenu
-              :index="menu.name"
-              v-for="(menu, index) in menus">
-              <template slot="title">
-                <span class="nav-next">{{menu.text}}</span>
-              </template>
-              <el-menu-item
-                :index="subMenu.path"
-                v-for="(subMenu, subIndex) in menu.children">{{subMenu.text}}</el-menu-item>
-            </el-submenu>
-          </el-menu>
-          <div class="p-layout-scale" @click="toggleSider">
-            <i :class="{'el-icon-arrow-right': isCollapse, 'el-icon-arrow-left': !isCollapse}"></i>
-          </div>
-        </aside>
-        <div class="p-layout-main">
-          <div class="p-layout-header">
-            <el-dropdown class="is-user" @command="handleDropdown">
-              <span class="el-dropdown-link">
-                lynzz <i class="el-icon-caret-bottom el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="logout">退出</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-          <div class="p-layout-breadcrumb"></div>
+  <div class="p-layout">
+    <div class="p-layout-topbar">
+      <div class="p-layout-name">
+        Project Name
+      </div>
+      <div class="p-layout-nav">
+        <el-dropdown class="is-user" @command="handleDropdown">
+          <span class="el-dropdown-link">
+            lynzz <i class="el-icon-caret-bottom el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="logout">退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
+    <div
+      class="p-layout-body"
+      :class="{
+        'sider-full': !isCollapse,
+        'sider-mini': isCollapse
+      }">
+      <aside class="p-layout-sider">
+        <div class="p-layout-collapse" @click="toggleSider"><i class="fa fa-bars"></i></div>
+        <el-menu
+          theme="dark"
+          :unique-opened="true"
+          :default-active="currentRoute"
+          :router="true">
+          <el-submenu
+            :index="menu.name"
+            v-for="(menu, index) in menus">
+            <template slot="title">
+              <i v-if="menu.icon" class="fa" :class="'fa-' + menu.icon"></i>
+              <span class="nav-next">{{menu.text}}</span>
+            </template>
+            <el-menu-item
+              :index="subMenu.path"
+              v-for="(subMenu, subIndex) in menu.children">
+                <i v-if="subMenu.icon" class="fa" :class="'fa-' + subMenu.icon"></i>
+                <span class="nav-next">{{subMenu.text}}</span>
+              </el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </aside>
+      <div class="p-layout-panel">
+        <div class="p-layout-content">
           <div class="p-layout-container">
+            <div class="p-layout-breadcrumb"></div>
             <slot></slot>
           </div>
-          <div class="p-layout-footer"> 版权所有 © 2016</div>
         </div>
+        <div class="p-layout-footer"> 版权所有 © 2016</div>
       </div>
     </div>
   </div>
@@ -55,6 +67,7 @@ export default {
     return {
       loggedIn: auth.loggedIn(),
       menus,
+      currentRoute: '/user',
       isCollapse: false
     }
   },
@@ -62,6 +75,9 @@ export default {
     auth.onChange = (loggedIn) => {
       this.loggedIn = loggedIn
     }
+  },
+  mounted () {
+    console.log(this.$router)
   },
   methods: {
     toggleSider () {
@@ -81,7 +97,11 @@ export default {
 @black: #1f2d3d;
 @light-black: #324057;
 @extra-light-black: #475669;
+@gray: #d3dce6;
+@light-gray: #e5e9f2;
 @siderWidth: 224px;
+@topHeight: 50px;
+@collapseHeight: 30px;
 @siderCollapseWidth: 64px;
 @transition: all 0.3s ease;
 
@@ -90,67 +110,99 @@ html, body, #app {
   height: 100%;
 }
 .p-layout {
-  &-aside {
-    position: relative;
-    min-height: 100%;
-    height: 100%;
-    &.is-collapse {
-      .p-layout-sider {
-        width: @siderCollapseWidth;
-      }
-      .p-layout-main {
-        margin-left: @siderCollapseWidth;
-      }
-      .p-layout-logo {
-        width: 32px;
-        margin: 16px;
-      }
-      .el-submenu__icon-arrow,
-      .el-menu .nav-next {
-        display: none;
-      }
-      .p-layout-scale {
-        width: @siderCollapseWidth;
-      }
+  &-topbar {
+    position: fixed;
+    width: 100%;
+    height: @topHeight;
+    line-height: @topHeight;
+    background-color: #373d41;
+    z-index: 101;
+    color: @gray;
+
+    a {
+      color: @gray;
     }
+    .el-dropdown-link {
+      color: @gray;
+    }
+  }
+  &-name {
+    padding-left: 10px;
+    display: inline-block;
+  }
+  &-nav {
+    float: right;
+    padding-right: 10px;
   }
   &-sider {
     width: @siderWidth;
     background-color: @black;
-    position: absolute;
-    overflow: visible;
-    padding-bottom: 24px;
-    top: 0;
+    position: fixed;
+    top: @topHeight;
     left: 0;
-    bottom: 0;
+    height: 100%;
     transition: @transition;
+    z-index: 102;
+    overflow-x: hidden;
   }
-  &-logo {
-    width: 150px;
-    height: 32px;
-    background: @light-black;
-    border-radius: 6px;
-    margin: 16px 24px 16px 28px;
-    transition: @transition;
-  }
-  &-scale {
-    height: 42px;
-    width: @siderWidth;
+  &-panel,
+  &-content {
     position: absolute;
+    left: 0;
+    top: 0;
     bottom: 0;
-    background-color: @extra-light-black;
-    color: #fff;
-    text-align: center;
-    line-height: 42px;
-    cursor: pointer;
+    right: 0;
+    overflow: hidden;
+    background: #fff;
     transition: @transition;
+    width: auto;
   }
-  &-main {
-    margin-left: @siderWidth;
-    transition: @transition;
+
+  &-collapse {
+    height: @collapseHeight;
+    line-height: @collapseHeight;
+    cursor: pointer;
+    background-color: @extra-light-black;
+    text-align: center;
+    color: @gray;
+  }
+  &-body {
+    position: absolute;
+    width: 100%;
+    top: @topHeight;
+    bottom: 0;
+    z-index: 100;
+    &.sider-full {
+      .p-layout-panel {
+        left: @siderWidth;
+      }
+    }
+    &.sider-mini {
+      .p-layout-panel {
+        left: @siderCollapseWidth;
+      }
+      .p-layout-sider {
+        width: @siderCollapseWidth;
+      }
+      .el-menu {
+        .el-submenu__icon-arrow,
+        .nav-next {
+          display: none;
+        }
+        &-item {
+          padding: 0;
+        }
+        .el-submenu {
+          text-align: center;
+        }
+      }
+    }
+  }
+  &-content {
+    overflow-y: auto;
   }
   &-container {
-    margin: 24px 16px;
+    padding: 15px;
   }
   &-footer {
     height: 64px;
@@ -162,9 +214,11 @@ html, body, #app {
     border-top: 1px solid #e9e9e9;
     width: 100%;
   }
+
   &-header {
     padding: 20px 10px;
     border-bottom: 1px solid #e9e9e9;
+    background-color: @light-black;
     &:before,
     &:after {
       content: '';

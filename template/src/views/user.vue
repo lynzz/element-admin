@@ -18,6 +18,9 @@
           </el-select>
         </el-form-item>
       </template>
+      <template slot="action">
+        <el-button>删除</el-button>
+      </template>
       <template slot="table">
         <el-table-column
           type="selection"
@@ -101,11 +104,9 @@
         this.refresh()
       },
       handleDelete (index, row) {
-        console.log(index, row)
         this.refresh()
       },
       handleCheck (val) {
-        console.log(val)
       },
       refresh () {
         this.$refs.user.refresh()

@@ -11,6 +11,9 @@
       </el-form-item>
     </el-form>
 
+    <div class="p-search-action">
+      <slot name="action"></slot>
+    </div>
     <el-table
       :data="tableData"
       @selection-change="handleSelectionChange"
@@ -113,8 +116,14 @@
     }
   }
 </script>
-<style>
-  .p-search .el-pagination {
-    margin-top: 10px;
+<style lang="less">
+  .p-search {
+    .el-pagination {
+      float: right;
+      margin-top: 10px;
+    }
+    &-action {
+      padding: 16px 0;
+    }
   }
 </style>
