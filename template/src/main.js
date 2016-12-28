@@ -9,11 +9,13 @@ import App from './App'
 
 import Layout from './components/Layout'
 import Search from './components/Search'
+import Editor from './components/Editor'
 
 import routes from './router-config'
 
 Vue.component(Layout.name, Layout)
 Vue.component(Search.name, Search)
+Vue.component(Editor.name, Editor)
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)

@@ -11,6 +11,7 @@ module.exports = {
     'html'
   ],
   globals: {
+    tinymce: true,
     require: true
   },
 
