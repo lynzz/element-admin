@@ -21,15 +21,17 @@
       <slot name="table"></slot>
     </el-table>
 
-    <el-pagination
-      :current-page="currentPage"
-      :page-size="pageSize"
-      :page-sizes="pageSizes"
-      :total="totalCount"
-      :layout="pageLayout"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange">
-    </el-pagination>
+    <el-row>
+      <el-pagination
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :page-sizes="pageSizes"
+        :total="totalCount"
+        :layout="pageLayout"
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange">
+      </el-pagination>
+    </el-row>
   </div>
 </template>
 
@@ -79,7 +81,7 @@
     },
     methods: {
       fetch (data = {}) {
-        const params = Object.assign(this.params, this.userForm, data)
+        const params = Object.assign(this.params, this.searchForm, data)
 
         this.fetchList(params).then(data => {
           this.tableData = data.listData

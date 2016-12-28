@@ -1,9 +1,11 @@
 <template>
   <div class="p-layout">
-    <div class="p-layout-topbar">
-      <div class="p-layout-name">
-        Project Name
+    <div class="p-layout-topbar clearfix">
+      <div class="p-layout-name" :class="{'sider-mini': isCollapse}">
+        <span class="full" v-if="!isCollapse">pAdmin</span>
+        <span class="mini" v-else>P</span>
       </div>
+      <div class="p-layout-collapse" @click="toggleSider"><i class="fa fa-bars"></i></div>
       <div class="p-layout-nav">
         <el-dropdown class="is-user" @command="handleDropdown">
           <span class="el-dropdown-link">
@@ -22,7 +24,6 @@
         'sider-mini': isCollapse
       }">
       <aside class="p-layout-sider">
-        <div class="p-layout-collapse" @click="toggleSider"><i class="fa fa-bars"></i></div>
         <el-menu
           theme="dark"
           :unique-opened="true"
@@ -47,8 +48,15 @@
       <div class="p-layout-panel">
         <div class="p-layout-content">
           <div class="p-layout-container">
-            <div class="p-layout-breadcrumb"></div>
-            <slot></slot>
+            <div class="p-layout-breadcrumb">
+              <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+              </el-breadcrumb>
+            </div>
+            <div class="p-layout-inner">
+              <slot></slot>
+            </div>
           </div>
         </div>
         <div class="p-layout-footer"> 版权所有 © 2016</div>
@@ -67,7 +75,7 @@ export default {
     return {
       loggedIn: auth.loggedIn(),
       menus,
-      currentRoute: '/user',
+      currentRoute: this.$router.history.current.fullPath,
       isCollapse: false
     }
   },
@@ -76,9 +84,7 @@ export default {
       this.loggedIn = loggedIn
     }
   },
-  mounted () {
-    console.log(this.$router)
-  },
+
   methods: {
     toggleSider () {
       this.isCollapse = !this.isCollapse
@@ -94,16 +100,17 @@ export default {
 </script>
 
 <style lang="less">
-@black: #1f2d3d;
+@black: #2a323c;
 @light-black: #324057;
 @extra-light-black: #475669;
+@blue: #03a9f4;
 @gray: #d3dce6;
 @light-gray: #e5e9f2;
-@siderWidth: 224px;
-@topHeight: 50px;
-@collapseHeight: 30px;
-@siderCollapseWidth: 64px;
+@sider-width: 224px;
+@top-height: 70px;
+@sider-collapse-width: 64px;
 @transition: all 0.3s ease;
+@cont-padding: 15px;
 
 html, body, #app {
   margin: 0;
@@ -113,32 +120,41 @@ html, body, #app {
   &-topbar {
     position: fixed;
     width: 100%;
-    height: @topHeight;
-    line-height: @topHeight;
-    background-color: #373d41;
+    height: @top-height;
+    line-height: @top-height;
+    background-color: @blue;
     z-index: 101;
-    color: @gray;
+    color: #fff;
 
     a {
       color: @gray;
     }
     .el-dropdown-link {
-      color: @gray;
+      color: #fff;
     }
   }
   &-name {
-    padding-left: 10px;
-    display: inline-block;
+    width: @sider-width;
+    text-align: center;
+    float: left;
+    background-color: @black;
+    font-family: Helvetica;
+    font-size: 30px;
+    &.sider-mini {
+      width: @sider-collapse-width;
+    }
+    .mini {
+    }
   }
   &-nav {
     float: right;
     padding-right: 10px;
   }
   &-sider {
-    width: @siderWidth;
+    width: @sider-width;
     background-color: @black;
     position: fixed;
-    top: @topHeight;
+    top: @top-height;
     left: 0;
     height: 100%;
     transition: @transition;
@@ -153,36 +169,36 @@ html, body, #app {
     bottom: 0;
     right: 0;
     overflow: hidden;
-    background: #fff;
+    background: #f5f5f5;
     transition: @transition;
     width: auto;
   }
 
   &-collapse {
-    height: @collapseHeight;
-    line-height: @collapseHeight;
+    float: left;
+    width: @top-height;
     cursor: pointer;
-    background-color: @extra-light-black;
+    background-color: rgba(255, 255, 255, .1);
     text-align: center;
-    color: @gray;
+    color: #fff;
   }
   &-body {
     position: absolute;
     width: 100%;
-    top: @topHeight;
+    top: @top-height;
     bottom: 0;
     z-index: 100;
     &.sider-full {
       .p-layout-panel {
-        left: @siderWidth;
+        left: @sider-width;
       }
     }
     &.sider-mini {
       .p-layout-panel {
-        left: @siderCollapseWidth;
+        left: @sider-collapse-width;
       }
       .p-layout-sider {
-        width: @siderCollapseWidth;
+        width: @sider-collapse-width;
       }
       .el-menu {
         .el-submenu__icon-arrow,
@@ -204,6 +220,18 @@ html, body, #app {
   &-container {
     padding: 15px;
   }
+  &-inner {
+    padding: 10px;
+    background: #fff;
+    border-radius: 3px;
+    margin-top: 10px;
+  }
+  &-breadcrumb {
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+    padding: 15px;
+    background-color: #fff;
+    margin: -15px -15px 0 -15px;
+  }
   &-footer {
     height: 64px;
     line-height: 64px;
@@ -213,6 +241,7 @@ html, body, #app {
     background: #fff;
     border-top: 1px solid #e9e9e9;
     width: 100%;
+    display: none;
   }
 
   &-header {

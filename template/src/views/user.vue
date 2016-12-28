@@ -20,6 +20,7 @@
       </template>
       <template slot="action">
         <el-button>删除</el-button>
+        <el-button>添加</el-button>
       </template>
       <template slot="table">
         <el-table-column
