@@ -1,11 +1,12 @@
 <template>
   <div class="page-login">
-    <div class="login-title">
-      <h3>项目名称</h3>
-    </div>
     <div class="login-box">
+      <div class="login-title">
+        <h3>项目名称</h3>
+        <p>登录</p>
+      </div>
       <div class="login-form">
-        <el-form label-position="top" :model="loginForm" :rules="loginRule" ref="loginForm" class="login-form">
+        <el-form label-position="top" :model="loginForm" :rules="loginRule" ref="loginForm">
           <el-form-item prop="username">
             <el-input placeholder="员工号" type="text" v-model="loginForm.username" auto-complete="off"></el-input>
           </el-form-item>
@@ -76,9 +77,17 @@ html, body, .page-login {
   padding-top: 50px;
 }
 .login-title {
-  color: #1D8CE0;
+  color: #2a323c;
   text-align: center;
-  padding: 20px 0 40px;
+  padding: 20px 0 0;
+  h3 {
+    margin: 0 0 30px 0;
+  }
+  p {
+    font-weight: bold;
+    color: #898989;
+    margin: 0;
+  }
 }
 .login-box {
   margin: 0 auto;
@@ -87,12 +96,9 @@ html, body, .page-login {
   background-color: #fff;
 }
 .login-form {
-  padding: 20px;
+  padding: 20px 30px;
   border: 0;
-  box-shadow: 1px 1px 1px #cccccc;
-  form {
-    background-color: #f7f7f7;
-  }
+
   button {
     display: block;
     width: 100%;
