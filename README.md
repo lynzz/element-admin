@@ -15,3 +15,9 @@ $ cd my-project
 $ npm install
 $ npm run dev
 ```
+
+## 主题预览
+
+![搜索页](https://raw.githubusercontent.com/lynzz/element-admin/master/screenshot/search.png)
+
+![带有编辑器的表单页](https://raw.githubusercontent.com/lynzz/element-admin/master/screenshot/form.png)
