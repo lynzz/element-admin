@@ -34,13 +34,13 @@
             v-for="(menu, index) in menus">
             <template slot="title">
               <i v-if="menu.icon" class="fa" :class="'fa-' + menu.icon"></i>
-              <span class="nav-next">{{menu.text}}</span>
+              <span class="nav-next">\{{menu.text}}</span>
             </template>
             <el-menu-item
               :index="subMenu.path"
               v-for="(subMenu, subIndex) in menu.children">
                 <i v-if="subMenu.icon" class="fa" :class="'fa-' + subMenu.icon"></i>
-                <span class="nav-next">{{subMenu.text}}</span>
+                <span class="nav-next">\{{subMenu.text}}</span>
               </el-menu-item>
           </el-submenu>
         </el-menu>

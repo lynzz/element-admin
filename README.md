@@ -1,6 +1,6 @@
 # vue-element-admin-boilerplate
 
-> 用 vue-cli 生成的 vue2 与 element-ui 的后台开发脚手架, 正在开发中，勿用
+> 用 vue-cli 生成的 vue2 与 element-ui 的后台开发脚手架
 
 ## 介绍
 
