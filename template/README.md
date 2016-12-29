@@ -2,7 +2,7 @@
 
 > {{description}}
 
-## Build Setup
+## 使用
 
 ``` bash
 # install dependencies
@@ -28,11 +28,10 @@ run test
 
 ```
 | - src
-  | - api
+  | - api           定义请求接口
   | - components    存放定义的组件
   | - store         vuex
   | - views         存放路由页面
   | - nav-config.js 路由配置
+| - static          静态资源  
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

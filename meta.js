@@ -23,11 +23,17 @@ module.exports = {
     "author": {
       "type": "string",
       "message": "Author"
+    },
+    "unit": {
+      "type": "confirm",
+      "message": "Setup unit tests with Karma + Mocha?"
+    },
+    "e2e": {
+      "type": "confirm",
+      "message": "Setup e2e tests with Nightwatch?"
     }
   },
   "filters": {
-    ".eslintrc.js": "lint",
-    ".eslintignore": "lint",
     "config/test.env.js": "unit || e2e",
     "test/unit/**/*": "unit",
     "test/e2e/**/*": "e2e"

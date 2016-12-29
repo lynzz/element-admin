@@ -16,7 +16,16 @@ $ npm install
 $ npm run dev
 ```
 
-## 主题预览
+## 特性
+
+- 支持 [mock](http://mockjs.com/) 数据, `mock` 路由按文件路径，单个文件就是一个接口
+
+- `ESLint` 采用 `standard` 方式
+
+- 编辑器用 [tinymce](https://www.tinymce.com/), 见 [Editor.vue](https://github.com/lynzz/element-admin/blob/master/template/src/components/Editor.vue)
+
+
+## 界面预览
 
 ### 搜索页
 
