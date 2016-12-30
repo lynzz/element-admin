@@ -34,3 +34,7 @@ $ npm run dev
 ### 编辑器页
 
 ![带有编辑器的表单页](https://raw.githubusercontent.com/lynzz/element-admin/master/screenshot/form.jpg)
+
+## TODO
+
+- [ ] add Vuex

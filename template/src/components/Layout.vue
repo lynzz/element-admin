@@ -206,7 +206,7 @@ html, body, #app {
           display: none;
         }
         &-item {
-          padding: 0;
+          padding: 0 !important;
         }
         .el-submenu {
           text-align: center;
