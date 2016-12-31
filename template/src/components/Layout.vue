@@ -2,15 +2,13 @@
   <div class="p-layout">
     <div class="p-layout-topbar clearfix">
       <div class="p-layout-name" :class="{'sider-mini': isCollapse}">
-        <span class="full" v-if="!isCollapse">pAdmin</span>
+        <router-link class="full" to="/" v-if="!isCollapse">pAdmin</router-link>
         <span class="mini" v-else>P</span>
       </div>
       <div class="p-layout-collapse" @click="toggleSider"><i class="fa fa-bars"></i></div>
       <div class="p-layout-nav">
         <el-dropdown class="is-user" @command="handleDropdown">
-          <span class="el-dropdown-link">
-            lynzz <i class="el-icon-caret-bottom el-icon--right"></i>
-          </span>
+          <img src="../assets/avatar.jpg" class="p-layout-avatar" alt="">
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="logout">退出</el-dropdown-item>
           </el-dropdown-menu>
@@ -24,6 +22,10 @@
         'sider-mini': isCollapse
       }">
       <aside class="p-layout-sider">
+        <div class="p-layout-user">
+          <img alt="" src="../assets/avatar.jpg" class="p-layout-avatar">
+          <div>userName</div>
+        </div>
         <el-menu
           theme="dark"
           :unique-opened="true"
@@ -143,12 +145,44 @@ html, body, #app {
     &.sider-mini {
       width: @sider-collapse-width;
     }
+    .full {
+      text-decoration: none;
+    }
     .mini {
     }
   }
   &-nav {
     float: right;
     padding-right: 10px;
+    .nav-item {
+      margin-right: 10px;
+      .fa {
+        font-size: 20px;
+      }
+      .el-badge__content.is-fixed {
+        top: 20px;
+      }
+    }
+    .p-layout-avatar {
+      width: 36px;
+      height: 36px;
+      border: 2px solid @gray;
+    }
+  }
+  &-avatar {
+    border-radius: 50%;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  &-user {
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    .p-layout-avatar {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 10px;
+    }
   }
   &-sider {
     width: @sider-width;
@@ -228,7 +262,7 @@ html, body, #app {
   }
   &-breadcrumb {
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
-    padding: 15px;
+    padding: 25px 15px;
     background-color: #fff;
     margin: -15px -15px 0 -15px;
   }
