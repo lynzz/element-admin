@@ -234,6 +234,9 @@ html, body, #app {
       .p-layout-sider {
         width: @sider-collapse-width;
       }
+      .p-layout-user {
+        display: none;
+      }
       .el-menu {
         .el-submenu__icon-arrow,
         .nav-next {
