@@ -24,6 +24,11 @@ $ npm run dev
 
 - 编辑器用 [tinymce](https://www.tinymce.com/), 见 [Editor.vue](https://github.com/lynzz/element-admin/blob/master/template/src/components/Editor.vue)
 
+## 演示
+
+[element-admin-demo](https://element-admin-demo-pvcijgwhsa.now.sh/)
+
+用户名密码都是 `admin`
 
 ## 界面预览
 
