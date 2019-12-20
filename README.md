@@ -2,7 +2,7 @@
 
 > 用 vue-cli 生成的 vue2 与 element-ui 的后台开发脚手架
 
-*已长期不维护，请移至* [waye-pro](https://github.com/wayejs/waye-pro.git)
+**已长期不维护，请移至** [waye-pro](https://github.com/wayejs/waye-pro.git)
 
 ## 介绍
 
